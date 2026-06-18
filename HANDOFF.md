@@ -14,7 +14,8 @@ Last updated: 2026-06-18.
 - GitHub Pages: enabled, source `main` branch root. Custom domain set via `CNAME` file (`onthelevelnc.com`).
 - Live: `http://onthelevelnc.com/` returns 200. `www` and apex resolve to GitHub Pages.
 - Cloudflare DNS for `onthelevelnc.com`: DONE (four `185.199.x.153` A records + `www` CNAME, all DNS-only).
-- Cloudflare DNS for `otlevel.com`: placeholder proxied A records (`@` and `www` to `192.0.2.1`) are in.
+- Cloudflare DNS for `otlevel.com`: now points at GitHub Pages (four `185.199.x.153` A records + `www` CNAME, DNS-only). Placeholder records removed.
+- `otlevel.com` redirect: DONE via Plan B. Separate repo `LJBOND7/otlevel-redirect` (local: `~/Desktop/otlevel-redirect/`) hosts a client-side redirect page (CNAME `otlevel.com`) forwarding to `https://onthelevelnc.com`, path-preserving. Its own HTTPS cert provisions via GitHub Pages too.
 - Link-preview image: `assets/og-image.png` (1200x630) plus Open Graph and Twitter meta tags in `index.html`, so texting the URL shows a branded card.
 
 Cloudflare zone IDs (for API work): `onthelevelnc.com` = `17f0037dd4f25890ef8117be3848ce30`, `otlevel.com` = `a3a92359b31e4bebd5233f069d643a17`. (API token is not stored here for security; Larry issues a short-lived scoped token when API work is needed.)
@@ -26,10 +27,7 @@ Cloudflare zone IDs (for API work): `onthelevelnc.com` = `17f0037dd4f25890ef8117
    Once it returns 200, enable Enforce HTTPS:
    `gh api -X PUT /repos/LJBOND7/On-The-Level-Roofing-Construction/pages --input - <<<'{"https_enforced":true}'`
 
-2. **otlevel.com redirect to onthelevelnc.com.** Not done yet. The API token used for DNS lacked the Dynamic Redirect permission. Two ways to finish:
-   - Larry adds the redirect rule in the Cloudflare dashboard (Rules, Redirect Rules, Static redirect to `https://onthelevelnc.com`, 301), or
-   - Larry adds Zone, Dynamic Redirect, Edit to a token and Claude PUTs the rule to `zones/<otlevel zid>/rulesets/phases/http_request_dynamic_redirect/entrypoint`, or
-   - Plan B: point otlevel.com at a small GitHub Pages redirect repo (needs only DNS edit + gh). If chosen, swap otlevel's placeholder A records for the four `185.199.x.153` A records (DNS-only) and host a meta-refresh page with a `CNAME` of `otlevel.com`.
+2. **otlevel.com redirect to onthelevelnc.com.** DONE via Plan B (GitHub Pages redirect repo `LJBOND7/otlevel-redirect`). Just confirm it resolves once its Pages cert issues: `curl -sL -o /dev/null -w "%{url_effective}\n" http://otlevel.com/` should land on onthelevelnc.com.
 
 3. **Google Workspace email.** Not set up. Larry signs up (Business Starter), adds DNS (MX/SPF/DKIM/DMARC, values in `SETUP.md`), then adds `larry@onthelevelnc.com` to Mail.app and/or authorizes it in the Gmail connection so Claude can autodraft. Add `otlevel.com` as a Workspace alias domain for `larry@otlevel.com`.
 
