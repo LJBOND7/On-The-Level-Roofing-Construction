@@ -80,10 +80,32 @@ If `onthelevelnc.com` lives at Cloudflare, add these in Cloudflare, DNS, Records
 
 > Tip: if your panel will not save a second TXT on `@` for SPF and verification, that is fine, multiple TXT records on the same name are allowed, add them as separate records.
 
-## Step 4, Second domain otlevel.com (only you, I will guide)
+## Step 4, Second domain otlevel.com (only you, registered June 2026)
 
-1. In Cloudflare, add a Redirect Rule: `otlevel.com/*` and `www.otlevel.com/*` to `https://onthelevelnc.com/$1` (301 permanent). Free.
-2. In Google Admin, Account, Domains, Manage domains, add `otlevel.com` as a **user alias domain**. That makes `larry@otlevel.com` automatically deliver to `larry@onthelevelnc.com`, no extra cost. (Google will give you a couple of DNS records to add at Cloudflare to verify and route it.)
+### 4a, Redirect otlevel.com to the main site
+
+Cloudflare needs to proxy the traffic before it can redirect it, so add two placeholder DNS records, then one redirect rule.
+
+In the `otlevel.com` zone, DNS, Records, add (both **Proxied**, orange cloud):
+
+| Type | Name | Value | Proxy |
+|------|------|-------|-------|
+| A | @ | 192.0.2.1 | Proxied |
+| A | www | 192.0.2.1 | Proxied |
+
+(`192.0.2.1` is a reserved dummy address. It is never reached because the redirect fires first.)
+
+Then Rules, Redirect Rules, Create rule:
+- Name: `otlevel to primary`
+- When incoming requests match: Field `Hostname`, Operator `contains`, Value `otlevel.com`
+- Then, URL redirect: Type `Dynamic`, Expression `concat("https://onthelevelnc.com", http.request.uri.path)`, Status `301`, Preserve query string `on`
+- Deploy.
+
+Now `otlevel.com` and `www.otlevel.com` send visitors to the main site, paths intact.
+
+### 4b, Make larry@otlevel.com work (after Workspace is set up)
+
+In Google Admin, Account, Domains, Manage domains, add `otlevel.com` as a **user alias domain**. That makes `larry@otlevel.com` deliver to `larry@onthelevelnc.com` at no extra cost. Google will give you MX and a verification record to add in the `otlevel.com` Cloudflare zone (email records live alongside the redirect records, they do not conflict).
 
 ## Step 5, Google Voice number (only you, takes 5 min)
 
