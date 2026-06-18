@@ -18,6 +18,31 @@ Register `otlevel.com` separately at **Cloudflare** (cloudflare.com, Registrar, 
 
 If you would rather own both at Cloudflare for one control panel, register both there and we do Step 3 by hand. Tell me which and I will tailor the rest.
 
+## Step 1b, Point onthelevelnc.com at the live site (only you, 5 min)
+
+The site is live on GitHub Pages and a `CNAME` file is now in the repo, so GitHub is ready to serve it on your domain. You just add the DNS records at Cloudflare.
+
+In Cloudflare, DNS, Records, add these. **Set each to "DNS only" (grey cloud, not orange)** so GitHub can issue its HTTPS certificate.
+
+**Apex domain (the four GitHub Pages A records):**
+
+| Type | Name | Value | Proxy |
+|------|------|-------|-------|
+| A | @ | 185.199.108.153 | DNS only |
+| A | @ | 185.199.109.153 | DNS only |
+| A | @ | 185.199.110.153 | DNS only |
+| A | @ | 185.199.111.153 | DNS only |
+
+**www (so onthelevelnc.com and www both work):**
+
+| Type | Name | Value | Proxy |
+|------|------|-------|-------|
+| CNAME | www | ljbond7.github.io | DNS only |
+
+After the records save (usually live within minutes), the site answers at `https://onthelevelnc.com`. GitHub auto-issues the SSL cert once it sees the DNS, then turn on "Enforce HTTPS" in the repo's Pages settings. Until DNS propagates, keep using the `ljbond7.github.io/On-The-Level-Roofing-Construction/` URL.
+
+Optional but recommended: in GitHub, Settings, Pages, "Verify" your domain to lock out takeover. Tell me and I will add the verification TXT record value to this list.
+
 ## Step 2, Google Workspace (only you)
 
 1. Go to workspace.google.com and start Business Starter.
