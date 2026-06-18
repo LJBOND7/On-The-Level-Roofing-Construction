@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="On The Level icon">
+  <rect width="512" height="512" rx="96" fill="#13386B"/>
+  <g transform="translate(110,132) scale(1.585)">
+    <path d="M 92 0 L 184 84 L 161 84 L 92 22 L 23 84 L 0 84 Z" fill="#ffffff"/>
+    <path d="M 92 36 L 152 92 L 32 92 Z" fill="#E0A11B"/>
+    <rect x="0" y="112" width="184" height="40" rx="7" ry="7" fill="#ffffff"/>
+    <rect x="62" y="121" width="60" height="22" rx="11" ry="11" fill="#E0A11B"/>
+    <circle cx="92" cy="132" r="8.5" fill="#697787"/>
+    <rect x="76" y="126" width="3" height="12" rx="1.5" fill="#697787"/>
+    <rect x="105" y="126" width="3" height="12" rx="1.5" fill="#697787"/>
+  </g>
+</svg>

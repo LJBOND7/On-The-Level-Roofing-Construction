@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 985 158" role="img" aria-label="On The Level Roofing and Construction">
+  <!-- ===== ICON: roof peak + spirit level ===== -->
+  <g transform="translate(8,2)">
+    <path d="M 92 0 L 184 84 L 161 84 L 92 22 L 23 84 L 0 84 Z" fill="#13386B"/>
+    <path d="M 92 36 L 152 92 L 32 92 Z" fill="#E0A11B"/>
+    <rect x="0" y="112" width="184" height="40" rx="7" ry="7" fill="#13386B"/>
+    <rect x="62" y="121" width="60" height="22" rx="11" ry="11" fill="#E0A11B"/>
+    <circle cx="92" cy="132" r="8.5" fill="#697787"/>
+    <rect x="76" y="126" width="3" height="12" rx="1.5" fill="#697787"/>
+    <rect x="105" y="126" width="3" height="12" rx="1.5" fill="#697787"/>
+  </g>
+  <!-- ===== WORDMARK (subline + rule centered under the main line) ===== -->
+  <text x="590" y="92" text-anchor="middle" font-family="Futura, 'Century Gothic', 'Helvetica Neue', Arial, sans-serif" font-size="92" font-weight="700" letter-spacing="4" fill="#13386B">ON THE LEVEL</text>
+  <rect x="240" y="106" width="700" height="3" fill="#E0A11B"/>
+  <text x="590" y="144" text-anchor="middle" font-family="Futura, 'Century Gothic', 'Helvetica Neue', Arial, sans-serif" font-size="33" font-weight="400" letter-spacing="9" fill="#697787">ROOFING &amp; CONSTRUCTION</text>
+</svg>
