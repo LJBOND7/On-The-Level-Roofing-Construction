@@ -59,18 +59,40 @@
   var success = document.getElementById('formSuccess');
   if (form) {
     form.addEventListener('submit', function (ev) {
-      // While the Formspree endpoint is still a placeholder, do not
-      // actually post. Show the confirmation so the flow can be demoed.
-      // Once a real endpoint is set in the action attribute, this lets
-      // the normal POST go through.
-      if (form.getAttribute('action').indexOf('your-form-id') !== -1) {
-        ev.preventDefault();
+      ev.preventDefault();
+      var action = form.getAttribute('action');
+
+      var showSuccess = function () {
         if (success) {
           success.style.display = 'block';
           success.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
         form.reset();
+      };
+
+      // If the endpoint is still a placeholder, just demo the confirmation.
+      if (action.indexOf('your-form-id') !== -1) {
+        showSuccess();
+        return;
       }
+
+      // Real endpoint: submit via AJAX so the visitor stays on the page
+      // and sees the inline confirmation instead of Formspree's page.
+      fetch(action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' }
+      })
+        .then(function (res) {
+          if (res.ok) {
+            showSuccess();
+          } else {
+            form.submit(); // fall back to a normal POST on error
+          }
+        })
+        .catch(function () {
+          form.submit();
+        });
     });
   }
 
