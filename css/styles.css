@@ -304,3 +304,20 @@ h1,h2,h3,h4 { font-family:var(--font-head); color:var(--navy); line-height:1.12;
   .cta { padding:48px 22px; }
   .footer__grid { grid-template-columns:1fr; gap:30px; }
 }
+
+/* ===== HVAC partner referral (All American Heating & Air) ===== */
+.partner {
+  background:var(--white);
+  border:1px solid var(--line);
+  border-left:6px solid var(--amber);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-md);
+  padding:42px 46px;
+  max-width:940px;
+  margin:0 auto;
+  text-align:center;
+}
+.partner h2 { font-size:clamp(24px,3vw,34px); margin-top:6px; }
+.partner p { color:var(--muted); font-size:17px; max-width:640px; margin:16px auto 26px; }
+.partner__note { font-size:13px; color:var(--steel); margin:20px auto 0; max-width:580px; line-height:1.5; }
+@media (max-width:640px) { .partner { padding:30px 22px; } }
